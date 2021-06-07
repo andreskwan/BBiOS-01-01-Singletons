@@ -9,6 +9,11 @@ final class AppState {
     
     func login(completion: (LoggedInUser) -> Void) {}
 }
+protocol Logger {
+    func login(completion: (LoggedInUser) -> Void)
+}
+
+extension AppState: Logger {}
 
 let appState = AppState.sharedInstance
 //I can't instantiate a singleton
@@ -23,14 +28,21 @@ extension AppState {
 
 appState.addition(3, 7)
 
-//singleton
-//URLSession.shared
-//URLSession()
-
 //How to write test code that involve Singletons
 class LoginViewController: UIViewController {
+    let state: Logger!
+    
+    init(state: Logger) {
+        self.state = state
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func didTapLoginButton() {
-        AppState.sharedInstance.login() { user in
+        state.login() { user in
             //show next screen
         }
     }
