@@ -1,9 +1,13 @@
 import UIKit
 
+struct LoggedInUser {}
+//Sigleton
 final class AppState {
     static let sharedInstance = AppState()
     
     private init() { }
+    
+    func login(completion: (LoggedInUser) -> Void) {}
 }
 
 let appState = AppState.sharedInstance
@@ -19,4 +23,16 @@ extension AppState {
 
 appState.addition(3, 7)
 
+//singleton
+//URLSession.shared
+//URLSession()
+
+//How to write test code that involve Singletons
+class LoginViewController: UIViewController {
+    func didTapLoginButton() {
+        AppState.sharedInstance.login() { user in
+            //show next screen
+        }
+    }
+}
 
