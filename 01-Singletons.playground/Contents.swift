@@ -2,7 +2,7 @@ import UIKit
 
 struct LoggedInUser {}
 //Sigleton
-final class AppState {
+class AppState {
     static let sharedInstance = AppState()
     
     private init() { }
@@ -28,9 +28,11 @@ extension AppState {
 
 appState.addition(3, 7)
 
+class MockAppState: AppState {}
+
 //How to write test code that involve Singletons
 class LoginViewController: UIViewController {
-    let state: Logger!
+    var state: Logger!
     
     init(state: Logger) {
         self.state = state
@@ -48,3 +50,5 @@ class LoginViewController: UIViewController {
     }
 }
 
+LoginViewController(state: AppState.sharedInstance)
+LoginViewController(state: MockAppState.sharedInstance)
