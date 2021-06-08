@@ -2,40 +2,41 @@ import UIKit
 
 struct LoggedInUser {}
 //Sigleton
-class AppState {
-    static let sharedInstance = AppState()
+class ApiClient {
+    static let sharedInstance = ApiClient()
     
     private init() { }
     
     func login(completion: (LoggedInUser) -> Void) {}
 }
-protocol Logger {
+
+protocol Login {
     func login(completion: (LoggedInUser) -> Void)
 }
 
-extension AppState: Logger {}
+extension ApiClient: Login {}
 
-let appState = AppState.sharedInstance
+let api = ApiClient.sharedInstance
 //I can't instantiate a singleton
-//let appState2 = AppState()
+//let api2 = ApiClient()
 
 //Extensions are allowed on final classes!!!
-extension AppState {
+extension ApiClient {
     func addition(_ a: Int, _ b: Int) -> Int {
         a + b
     }
 }
 
-appState.addition(3, 7)
+api.addition(3, 7)
 
-class MockAppState: AppState {}
+class MockApiClient: ApiClient {}
 
 //How to write test code that involve Singletons
 class LoginViewController: UIViewController {
-    var state: Logger!
+    var api: Login!
     
-    init(state: Logger) {
-        self.state = state
+    init(api: Login) {
+        self.api = api
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,11 +45,44 @@ class LoginViewController: UIViewController {
     }
     
     func didTapLoginButton() {
-        state.login() { user in
+        api.login() { user in
             //show next screen
         }
     }
 }
 
-LoginViewController(state: AppState.sharedInstance)
-LoginViewController(state: MockAppState.sharedInstance)
+//this is production code
+LoginViewController(api: ApiClient.sharedInstance)
+//this is for tests
+LoginViewController(api: MockApiClient.sharedInstance)
+
+struct Follower {}
+
+protocol Followers {
+    func loadFollowers(completion: ([Follower]) -> Void)
+}
+
+extension ApiClient: Followers {
+    func loadFollowers(completion: ([Follower]) -> Void) {}
+}
+
+class FeedViewController: UIViewController {
+    var api: Followers!
+    
+    init(api: Followers) {
+        self.api = api
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didTapLoginButton() {
+        api.loadFollowers { followers in
+            
+        }
+    }
+}
+
+
