@@ -3,5 +3,7 @@
     <pages>
         <page name='E1-Singletons, global mutable state, Lazy, Mocks'/>
         <page name='E1-Singletons'/>
+        <page name='E2-Inheritance'/>
+        <page name='E3-Modularization &amp; Composition'/>
     </pages>
 </playground>
