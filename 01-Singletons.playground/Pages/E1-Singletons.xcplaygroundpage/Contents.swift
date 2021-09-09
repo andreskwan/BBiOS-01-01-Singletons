@@ -6,15 +6,15 @@ class ApiClient {
     static let sharedInstance = ApiClient()
     
     private init() { }
-    
-    func login(completion: (LoggedInUser) -> Void) {}
 }
 
 protocol Login {
     func login(completion: (LoggedInUser) -> Void)
 }
 
-extension ApiClient: Login {}
+extension ApiClient: Login {
+    func login(completion: (LoggedInUser) -> Void) {}
+}
 
 let api = ApiClient.sharedInstance
 //I can't instantiate a singleton
@@ -45,9 +45,10 @@ class LoginViewController: UIViewController {
     }
     
     func didTapLoginButton() {
-        api.login() { user in
-            //show next screen
-        }
+        //trailling closure
+        let value: () = api.login { user in }
+        
+        print("value: \(value)")
     }
 }
 
