@@ -22,6 +22,8 @@ vowels2
 let eages = [(name: "Kira",6),(name: "Mandy",2),(name: "Miel",1)].map{ $0.name }
 eages
 
-(0...10).map{ print($0)}
+let informationalResponses = (190...199)
+informationalResponses.map{ print($0)}
 
+let openinformationalResponses = (0..<10)
 //: [Next](@next)

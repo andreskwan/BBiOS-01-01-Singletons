@@ -5,7 +5,8 @@
         <page name='E1-Singletons'/>
         <page name='E2-Inheritance'/>
         <page name='E3-Modularization &amp; Composition'/>
-        <page name='E4'/>
-        <page name='high order functions'/>
+        <page name='E4-functions as interfaces'/>
+        <page name='E5-High order functions'/>
+        <page name='E6-ValidData'/>
     </pages>
 </playground>
