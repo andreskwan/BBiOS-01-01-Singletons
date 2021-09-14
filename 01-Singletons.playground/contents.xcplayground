@@ -8,5 +8,11 @@
         <page name='E4-functions as interfaces'/>
         <page name='E5-High order functions'/>
         <page name='E6-ValidData'/>
+        <page name='E6-MemoryLeak '/>
+        <page name='ARC'/>
+        <page name='Weak - Solving a Retain cycle'/>
+        <page name='Unowned '/>
+        <page name='Unowned optional'/>
+        <page name='Closure - Retain cycles'/>
     </pages>
 </playground>
