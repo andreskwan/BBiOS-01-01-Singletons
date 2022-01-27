@@ -14,5 +14,6 @@
         <page name='Unowned '/>
         <page name='Unowned optional'/>
         <page name='Closure - Retain cycles'/>
+        <page name='Functions, Closures, Completions'/>
     </pages>
 </playground>
